@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: wbooks-api_development
+  username: wbooks-api
+  password: wbooks-api
+
+test:
+  <<: *default
+  database: wbooks-api_test
+  username: wbooks-api
+  password: wbooks-api
+
+production:
+  <<: *default
+  database: wbooks-api_production
+  username: wbooks-api
+  password: <%= ENV['WBOOKS-API_DATABASE_PASSWORD'] %>
