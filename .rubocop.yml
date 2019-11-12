@@ -2,4 +2,4 @@ Documentation:
   Enabled: false
 LineLength:
   Max: 99
-Require: rubocop-rails
+require: rubocop-rails
