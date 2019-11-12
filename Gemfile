@@ -54,4 +54,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Rubocop
-gem 'rubocop'
+gem 'rubocop', '~> 0.76.0'
