@@ -60,3 +60,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Rubocop & Rubocop-Rails
 gem 'rubocop', '~> 0.76.0'
 gem 'rubocop-rails', '~> 2.3.2'
+
+# Devise gems for user authentication
+gem 'devise', '~> 4.7.1'
+gem 'devise_token_auth', '~> 1.1.3'
+gem 'omniauth', '~> 1.9.0'
+gem 'hashie', '~> 3.6.0'
