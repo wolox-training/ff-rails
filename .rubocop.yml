@@ -3,3 +3,5 @@ Documentation:
 LineLength:
   Max: 99
 require: rubocop-rails
+Style/FrozenStringLiteralComment:
+  Enabled: false
