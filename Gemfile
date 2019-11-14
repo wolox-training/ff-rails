@@ -47,7 +47,6 @@ group :development, :test do
   gem 'faker', '~> 2.7.0'
   # FactoryBot to create factories from the models
   gem 'factory_bot', '~> 5.1.1'
-
 end
 
 group :development do
