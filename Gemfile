@@ -41,6 +41,13 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Rspec for testing
   gem 'rspec-rails', '~> 3.9.0'
+  # Database cleaner
+  gem 'database_cleaner', '~> 1.7.0'
+  # Faker to create fake data
+  gem 'faker', '~> 2.7.0'
+  # FactoryBot to create factories from the models
+  gem 'factory_bot', '~> 5.1.1'
+
 end
 
 group :development do
