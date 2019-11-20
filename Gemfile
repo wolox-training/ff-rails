@@ -46,7 +46,8 @@ group :development, :test do
   # Faker to create fake data
   gem 'faker', '~> 2.7.0'
   # FactoryBot to create factories from the models
-  gem 'factory_bot', '~> 5.1.1'
+  gem 'factory_bot_rails', '~> 5.1.1'
+  gem 'shoulda-matchers', '~> 3.0'
 end
 
 group :development do
