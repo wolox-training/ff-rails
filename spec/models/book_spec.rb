@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Book do
   context 'valid model' do
-    subject(:book) { create(:book) } 
+    subject(:book) { create(:book) }
     it { is_expected.to be_valid }
     it { is_expected.to validate_presence_of(:genre) }
     it { is_expected.to validate_presence_of(:author) }
@@ -15,7 +15,7 @@ describe Book do
   end
 
   context 'invalid model' do
-    [:genre, :author, :image, :title, :editor, :year].each do |field|
+    %i[genre author image title editor year].each do |field|
       subject(:book) { build(:book, field => nil) }
       it { is_expected.not_to be_valid }
       it { is_expected.not_to be_persisted }
