@@ -70,3 +70,11 @@ gem 'rubocop-rails', '~> 2.3.2'
 
 # Devise gems for user authentication
 gem 'devise_token_auth', '~> 1.1.3'
+gem 'omniauth', '~> 1.9.0'
+gem 'hashie', '~> 3.6.0'
+
+# Active Model Serializers to serialize JSON responses
+gem 'active_model_serializers', '~> 0.10.0'
+
+# Wor-Paginate for paginated responses
+gem 'wor-paginate', '~> 0.1.8'
