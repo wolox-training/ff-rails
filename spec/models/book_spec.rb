@@ -18,7 +18,9 @@ describe Book do
     %i[genre author image title editor year].each do |field|
       subject(:book) { build(:book, field => nil) }
       it { is_expected.not_to be_valid }
-      it { is_expected.not_to be_persisted }
+      it 'is not persisted' do
+        expect(subject.save).to be false
+      end
     end
   end
 end
