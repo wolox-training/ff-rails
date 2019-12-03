@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20191127131936) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "confirmation_token"
