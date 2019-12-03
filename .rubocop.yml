@@ -5,3 +5,9 @@ LineLength:
 require: rubocop-rails
 Style/FrozenStringLiteralComment:
   Enabled: false
+Metrics/BlockLength:
+  Max: 25
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
