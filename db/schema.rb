@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191127131936) do
+ActiveRecord::Schema.define(version: 20191120130458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(version: 20191127131936) do
     t.string "year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "rent_id"
-    t.index ["rent_id"], name: "index_books_on_rent_id"
   end
 
   create_table "rents", force: :cascade do |t|
@@ -47,23 +45,19 @@ ActiveRecord::Schema.define(version: 20191127131936) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name", null: false
-    t.string "last_name", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.json "tokens"
-    t.bigint "rent_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["rent_id"], name: "index_users_on_rent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "books", "rents"
   add_foreign_key "rents", "books"
   add_foreign_key "rents", "users"
-  add_foreign_key "users", "rents"
 end
