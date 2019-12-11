@@ -6,11 +6,17 @@ module Api
       before_action :authenticate_user!
 
       def index
-        render_paginated Rent.all
+        render_paginated Rent.where(user_id: )
       end
 
       def create
-        @rent = Rent.new(params)
+        @rent = Rent.create(rent_params)
+      end
+
+      private
+
+      def rent_params
+        params.require(:rent).permit(:user_id, :book_id, :start_date, :end_date)
       end
     end
   end
