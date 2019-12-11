@@ -6,11 +6,16 @@ module Api
       before_action :authenticate_user!
 
       def index
-        render_paginated Rent.where(user_id: )
+        render_paginated @current_user.rents, each_serializer: RentSerializer
       end
 
       def create
         @rent = Rent.create(rent_params)
+        if @rent.save
+          render json: @rent, status: :created
+        else
+          render json: { message: 'Cannot create rent, invalid data' }, status: :bad_request
+        end
       end
 
       private
