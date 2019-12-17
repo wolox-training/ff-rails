@@ -1,3 +1,4 @@
+require 'dotenv/load'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -51,4 +52,18 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Sidekiq config
+  config.active_job.queue_adapter = :sidekiq
+
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.smtp_settings = {
+    user_name: Rails.application.secrets.mailer_user_name,
+    password: Rails.application.secrets.mailer_password,
+    address: Rails.application.secrets.mailer_address,
+    domain: Rails.application.secrets.mailer_domain,
+    port: Rails.application.secrets.mailer_port,
+    authentication: Rails.application.secrets.mailer_authentication
+  }
 end
