@@ -68,5 +68,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rubocop', '~> 0.76.0'
 gem 'rubocop-rails', '~> 2.3.2'
 
-# Devise gems for user authentication
+# Devise gem for user authentication
 gem 'devise_token_auth', '~> 1.1.3'
+
+# Active Model Serializers to serialize JSON responses
+gem 'active_model_serializers', '~> 0.10.0'
+
+# Wor-Paginate for paginated responses
+gem 'wor-paginate', '~> 0.1.8'
