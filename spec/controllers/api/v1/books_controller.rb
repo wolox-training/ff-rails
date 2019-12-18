@@ -27,6 +27,16 @@ describe Api::V1::BooksController, type: :controller do
         expect(response).to have_http_status(:ok)
       end
     end
+
+    context 'When fetching no books' do
+      before do
+        get :index
+      end
+
+      it 'has 404 status' do
+        expect(response).to have_http_status(:not_found)
+      end
+    end
   end
 
   describe 'GET #show' do
@@ -45,6 +55,16 @@ describe Api::V1::BooksController, type: :controller do
 
       it 'has 200 status' do
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'When fetching a book that does not exist' do
+      before do
+        get :show, params: { id: 'wrong_id' }
+      end
+
+      it 'has 404 status' do
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
