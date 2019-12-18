@@ -16,7 +16,7 @@ describe Api::V1::BooksController, type: :controller do
         expected = ActiveModel::Serializer::CollectionSerializer.new(
           books, each_serializer: BookSerializer
         ).to_json
-        expect(response.body.to_json) =~ JSON.parse(expected)
+        expect(response.body.to_json).to eq JSON.parse(expected)
       end
 
       it 'is paginated' do
@@ -33,8 +33,8 @@ describe Api::V1::BooksController, type: :controller do
         get :index
       end
 
-      it 'has 404 status' do
-        expect(response).to have_http_status(:not_found)
+      it 'responds an empty page' do
+        expect(JSON.parse(response.body)['total_count']).to eq(0)
       end
     end
   end
@@ -49,7 +49,7 @@ describe Api::V1::BooksController, type: :controller do
 
       it 'returns the book json' do
         expect(JSON.parse(response.body).to_json).to eq BookSerializer.new(
-          book, root: false
+          book
         ).to_json
       end
 
