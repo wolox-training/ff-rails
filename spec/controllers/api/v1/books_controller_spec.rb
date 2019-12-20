@@ -16,7 +16,7 @@ describe Api::V1::BooksController, type: :controller do
         expected = ActiveModel::Serializer::CollectionSerializer.new(
           books, each_serializer: BookSerializer
         ).to_json
-        expect(response.body.to_json).to eq JSON.parse(expected)
+        expect(JSON.parse(response.body, symbolize_names: true)[:page].to_json).to eq expected
       end
 
       it 'is paginated' do
