@@ -35,6 +35,7 @@ describe Api::V1::BooksController, type: :controller do
 
       it 'responds an empty page' do
         expect(JSON.parse(response.body)['total_count']).to eq(0)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
