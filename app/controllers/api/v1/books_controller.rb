@@ -1,8 +1,6 @@
 module Api
   module V1
-    class BooksController < ApplicationController
-      include Wor::Paginate
-
+    class BooksController < ApiController
       before_action :authenticate_user!
 
       def index

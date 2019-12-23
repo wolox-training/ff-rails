@@ -1,8 +1,6 @@
 module Api
   module V1
-    class RentsController < ApplicationController
-      include Wor::Paginate
-
+    class RentsController < ApiController
       before_action :authenticate_user!
 
       def index
