@@ -1,8 +1,6 @@
 module Api
   module V1
     class RentsController < ApiController
-      before_action :authenticate_user!
-
       def index
         render_paginated @current_user.rents, each_serializer: RentSerializer
       end
