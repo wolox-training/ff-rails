@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   private
 
   def user_not_authorized
     render json: { message: 'User not authorized to perform this action' }, status: :unauthorized
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
   def not_found_error
     render json: { message: 'Record not found' }, status: :not_found
