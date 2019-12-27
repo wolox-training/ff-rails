@@ -6,6 +6,6 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     password { alphanumeric_password }
     password_confirmation { alphanumeric_password }
-    email { "#{first_name}.#{last_name}@wolox.com.ar".downcase }
+    sequence(:email) { |n| "test_user#{n}@wolox.com.ar".downcase }
   end
 end
