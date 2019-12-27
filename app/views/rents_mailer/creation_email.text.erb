@@ -1,7 +1,7 @@
-<%= t('rent_title', :locale => @user.locale) %>
+<%= t('.rent_title') %>
 <% @book.attributes.except("updated_at", "created_at", "id").each do |attribute| %>
-  <%= t(attribute[0], :locale => @user.locale) %> <%= attribute[1] %>
+  <%= t('.' + attribute[0]) %> <%= attribute[1] %>
 <% end %>
-<%= t('created_at', :locale => @user.locale) %> <%= @rent.created_at %>
-<%= t('rent_start_date', :locale => @user.locale) %> <%= @rent.start_date %>
-<%= t('rent_end_date', :locale => @user.locale) %> <%= @rent.end_date %>
+<%= t('.created_at') %> <%= @rent.created_at %>
+<%= t('.rent_start_date') %> <%= @rent.start_date %>
+<%= t('.rent_end_date') %> <%= @rent.end_date %>

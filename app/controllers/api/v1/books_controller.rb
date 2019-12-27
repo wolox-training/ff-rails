@@ -1,10 +1,6 @@
 module Api
   module V1
-    class BooksController < ApplicationController
-      include Wor::Paginate
-
-      before_action :authenticate_user!
-
+    class BooksController < ApiController
       def index
         render_paginated Book.all
       end
