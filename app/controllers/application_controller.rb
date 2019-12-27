@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     render json: { message: 'User not authorized to perform this action' }, status: :unauthorized
+  end
 
   def not_found_error
     render json: { message: 'Record not found' }, status: :not_found
