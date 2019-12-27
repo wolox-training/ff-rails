@@ -1,10 +1,5 @@
 class RentPolicy < ApplicationPolicy
-  def initialize(user, rent)
-    @user = user
-    @rent = rent
-  end
-
-  class Scope
+  class Scope < Scope
     def resolve
       scope.where(user: user)
     end

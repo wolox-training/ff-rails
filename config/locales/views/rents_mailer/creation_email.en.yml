@@ -1,0 +1,13 @@
+en:
+  rents_mailer:
+    creation_email:
+      rent_title: "Rented book"
+      created_at: "Rent creation at: "
+      rent_start_date: "Rent starts at: "
+      rent_end_date: "Rent ends at: "
+      title: "Title: "
+      genre: "Genre: "
+      author: "Author: "
+      image: "Image: "
+      editor: "Editor: "
+      year: "Year: "
