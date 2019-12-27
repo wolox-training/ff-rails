@@ -1,4 +1,3 @@
-require 'dotenv/load'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -57,6 +56,8 @@ Rails.application.configure do
   config.active_job.queue_adapter = :sidekiq
 
   config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
     user_name: Rails.application.secrets.mailer_user_name,
