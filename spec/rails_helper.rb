@@ -8,6 +8,8 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'shoulda/matchers'
+require 'wor/paginate/rspec'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -43,8 +45,8 @@ end
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   # Required by Database Cleaner
   config.use_transactional_fixtures = false
 
