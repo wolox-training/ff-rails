@@ -2,9 +2,9 @@ en:
   rents_mailer:
     creation_email:
       rent_title: "Rented book"
-      created_at: "Rent creation at: "
-      rent_start_date: "Rent starts at: "
-      rent_end_date: "Rent ends at: "
+      created_at: "Rent creation at: %{created_at}"
+      rent_start_date: "Rent starts at: %{rent_start_date}"
+      rent_end_date: "Rent ends at: %{rent_end_date}"
       title: "Title: "
       genre: "Genre: "
       author: "Author: "

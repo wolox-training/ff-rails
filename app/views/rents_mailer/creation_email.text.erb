@@ -2,6 +2,6 @@
 <% @book.attributes.except("updated_at", "created_at", "id").each do |attribute| %>
   <%= t('.' + attribute[0]) %> <%= attribute[1] %>
 <% end %>
-<%= t('.created_at') %> <%= @rent.created_at %>
-<%= t('.rent_start_date') %> <%= @rent.start_date %>
-<%= t('.rent_end_date') %> <%= @rent.end_date %>
+<%= t('.created_at', created_at: @rent.created_at) %>
+<%= t('.rent_start_date', rent_start_date: @rent.start_date) %>
+<%= t('.rent_end_date', rent_end_date: @rent.end_date) %>
