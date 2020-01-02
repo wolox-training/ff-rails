@@ -2,11 +2,12 @@ module Api
   module V1
     class RentsController < ApiController
       def index
-        render_paginated @current_user.rents, each_serializer: RentSerializer
+        render_paginated policy_scope(Rent), each_serializer: RentSerializer
       end
 
       def create
         @rent = Rent.create(rent_params)
+        authorize @rent
         if @rent.save
           RentsMailer.with(rent_id: @rent.id).creation_email.deliver_later
           render json: @rent, status: :created

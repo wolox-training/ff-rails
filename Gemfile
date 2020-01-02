@@ -84,3 +84,6 @@ gem 'sidekiq', '~> 6.0.3'
 
 # I18n
 gem 'rails-i18n', '~> 5.1.3'
+
+# Pundit
+gem 'pundit', '~> 2.1.0'
