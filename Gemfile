@@ -48,6 +48,8 @@ group :development, :test do
   # FactoryBot to create factories from the models
   gem 'factory_bot_rails', '~> 5.1.1'
   gem 'shoulda-matchers', '~> 3.0'
+  # Dotenv for env vars
+  gem 'dotenv', '~> 2.7.5'
 end
 
 group :development do
@@ -76,3 +78,6 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 # Wor-Paginate for paginated responses
 gem 'wor-paginate', '~> 0.1.8'
+
+# Mailer
+gem 'sidekiq', '~> 6.0.3'
