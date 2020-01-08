@@ -4,7 +4,7 @@ module Api
       def show
         external_api_book = api_request
         book = external_api_book['ISBN:' + isbn]
-        render json: book.slice('title', 'subtitle', 'number_of_pages', 'authors').merge(ISBN: isbn)
+        render json: book.slice('title', 'subtitle', 'number_of_pages', 'authors').merge(ISBN: isbn) if !book.blank?
       end
 
       def api_request
