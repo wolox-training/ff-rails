@@ -14,13 +14,10 @@ describe Api::V1::BookSuggestionsController, type: :controller do
 
       it 'belongs to that user' do
         post_method
-        expect(JSON.parse(response.body)['user_id']).to eq user[:id]
+        expect(JSON.parse(response.body)['user_id']).to eq user.id
       end
 
-      it 'has status code 201' do
-        post_method
-        expect(response).to have_http_status(:created)
-      end
+      it { is_expected.to have_http_status(:created) }
     end
 
     context 'When creating a valid book suggestion without user' do
@@ -29,10 +26,7 @@ describe Api::V1::BookSuggestionsController, type: :controller do
         expect { post_method }.to change { BookSuggestion.count }.by(1)
       end
 
-      it 'has status code 201' do
-        post_method
-        expect(response).to have_http_status(:created)
-      end
+      it { is_expected.to have_http_status(:created) }
     end
 
     context 'When creating an invalid book suggestion' do
@@ -42,10 +36,7 @@ describe Api::V1::BookSuggestionsController, type: :controller do
           expect { post_method }.to change { BookSuggestion.count }.by(0)
         end
 
-        it 'has status code 400' do
-          post_method
-          expect(response).to have_http_status(:bad_request)
-        end
+        it { is_expected.to have_http_status(:bad_request) }
       end
     end
   end
