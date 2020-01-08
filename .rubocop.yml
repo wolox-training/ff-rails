@@ -5,6 +5,8 @@ LineLength:
 require: rubocop-rails
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/MultilineIfModifier:
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
