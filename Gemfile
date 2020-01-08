@@ -87,3 +87,6 @@ gem 'rails-i18n', '~> 5.1.3'
 
 # Pundit
 gem 'pundit', '~> 2.1.0'
+
+# API integration - Httparty
+gem 'httparty', '~> 0.17.3'
