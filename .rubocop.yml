@@ -1,7 +1,7 @@
 Documentation:
   Enabled: false
 LineLength:
-  Max: 100
+  Max: 99
 require: rubocop-rails
 Style/FrozenStringLiteralComment:
   Enabled: false
