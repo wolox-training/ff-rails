@@ -5,17 +5,44 @@ describe ExternalApiService, type: :service do
 
   describe 'GET external_api#show' do
     context 'when searching with a valid ISBN' do
-      let!(:isbn) { '0385472579' }
+      let!(:valid_isbn) { '0385472579' }
 
       before do
-        stubs.external_api_service_request_success(isbn)
-        ExternalApiService.api_request(isbn)
+        stubs.external_api_service_request_success
+        ExternalApiService.api_request(valid_isbn)
       end
 
       it 'makes an external request' do
         expect(WebMock)
           .to(have_requested(:get,
-                            'https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn + '&format=json&jscmd=data'))
+                             'https://openlibrary.org/api/books?bibkeys=ISBN:' + valid_isbn
+                             .concat('&format=json&jscmd=data')))
+      end
+
+      it 'returns a hash with expected attributes' do
+        expected = File.read('./spec/support/fixtures/external_api_service_response_success.json')
+        expect(ExternalApiService.api_request(valid_isbn)).to be_json_eql(expected)
+      end
+    end
+
+    context 'when searching with an invalid ISBN' do
+      let!(:wrong_isbn) { 'wrong_isbn' }
+
+      before do
+        stubs.external_api_service_not_found
+        ExternalApiService.api_request(wrong_isbn)
+      end
+
+      it 'makes an external request' do
+        expect(WebMock)
+          .to(have_requested(:get,
+                             'https://openlibrary.org/api/books?bibkeys=ISBN:' + wrong_isbn
+                             .concat('&format=json&jscmd=data')))
+      end
+
+      it 'returns an error message' do
+        expected = File.read('./spec/support/fixtures/external_api_service_not_found.json')
+        expect(ExternalApiService.api_request(wrong_isbn)).to be_json_eql(expected)
       end
     end
   end
