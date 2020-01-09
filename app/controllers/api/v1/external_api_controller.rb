@@ -2,17 +2,17 @@ module Api
   module V1
     class ExternalApiController < ApiController
       def show
-        external_api_book = api_request
-        book = external_api_book['ISBN:' + isbn]
+        book = search_book
         return book_not_found if book.blank?
 
-        book_info(book)
+        render json: book
       end
 
-      def book_info(book)
-        render json: book
+      def search_book
+        search = api_request['ISBN:' + isbn]
+        search
           .slice('title', 'subtitle', 'number_of_pages', 'authors')
-          .merge(ISBN: isbn)
+          .merge(ISBN: isbn) unless search.blank?
       end
 
       def book_not_found
