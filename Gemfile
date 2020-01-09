@@ -93,3 +93,6 @@ gem 'httparty', '~> 0.17.3'
 
 # Webmock
 gem 'webmock', '~> 3.7.6'
+
+# JSON_Spec
+gem 'json_spec', '~> 1.1.5'
