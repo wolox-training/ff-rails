@@ -10,9 +10,11 @@ module Api
 
       def search_book
         search = api_request['ISBN:' + isbn]
+        return if search.blank?
+
         search
           .slice('title', 'subtitle', 'number_of_pages', 'authors')
-          .merge(ISBN: isbn) unless search.blank?
+          .merge(ISBN: isbn)
       end
 
       def book_not_found
