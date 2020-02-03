@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe ExternalApiService, type: :service do
-  let!(:stubs)  { ExternalApiServiceStubs.new }
+  let!(:stubs) { ExternalApiServiceStubs.new }
   let!(:service) { described_class.new }
 
   describe 'GET external_api#show' do
