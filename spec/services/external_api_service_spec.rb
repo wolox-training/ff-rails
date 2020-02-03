@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe ExternalApiService, type: :service do
   let!(:stubs)  { ExternalApiServiceStubs.new }
+  let!(:service) { described_class.new }
 
   describe 'GET external_api#show' do
     context 'when searching with a valid ISBN' do
@@ -9,7 +10,7 @@ describe ExternalApiService, type: :service do
 
       before do
         stubs.external_api_service_request_success
-        ExternalApiService.api_request(valid_isbn)
+        service.api_request(valid_isbn)
       end
 
       it 'makes an external request' do
@@ -21,7 +22,7 @@ describe ExternalApiService, type: :service do
 
       it 'returns a hash with expected attributes' do
         expected = File.read('./spec/support/fixtures/external_api_service_response_success.json')
-        expect(ExternalApiService.api_request(valid_isbn)).to be_json_eql(expected)
+        expect(service.api_request(valid_isbn)).to be_json_eql(expected)
       end
     end
 
@@ -30,7 +31,7 @@ describe ExternalApiService, type: :service do
 
       before do
         stubs.external_api_service_not_found
-        ExternalApiService.api_request(wrong_isbn)
+        service.api_request(wrong_isbn)
       end
 
       it 'makes an external request' do
@@ -42,7 +43,7 @@ describe ExternalApiService, type: :service do
 
       it 'returns an error message' do
         expected = File.read('./spec/support/fixtures/external_api_service_not_found.json')
-        expect(ExternalApiService.api_request(wrong_isbn)).to be_json_eql(expected)
+        expect(service.api_request(wrong_isbn)).to be_json_eql(expected)
       end
     end
   end

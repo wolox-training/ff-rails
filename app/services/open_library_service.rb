@@ -2,7 +2,7 @@ class OpenLibraryService
   include HTTParty
   base_uri 'https://openlibrary.org/api/books?bibkeys=ISBN:'
 
-  def self.api_request(isbn)
-    get(base_uri + isbn + '&jscmd=data&format=json')
+  def api_request(isbn)
+    self.class.get(isbn + '&jscmd=data&format=json')
   end
 end
