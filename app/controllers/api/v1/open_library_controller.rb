@@ -15,7 +15,7 @@ module Api
       end
 
       def api_request
-        OpenLibraryService.api_request(isbn)
+        ExternalApiService.new.api_request(isbn)
       end
 
       def isbn
