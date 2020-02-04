@@ -5,7 +5,7 @@ describe Api::V1::ExternalApiController, type: :controller do
 
   describe 'GET #book_information' do
     context 'When using a valid ISBN' do
-      let!(:valid_isbn) { 'ISBN:0385472579' }
+      let!(:valid_isbn) { '0385472579' }
       let!(:book_info_result) do
         JSON.parse(
           File.read('./spec/support/fixtures/external_api_service_response_success.json'),
@@ -15,7 +15,7 @@ describe Api::V1::ExternalApiController, type: :controller do
 
       before do
         stubbed_service = instance_double(ExternalApiService)
-        allow(stubbed_service).to receive(:api_request).and_return(book_info_result)
+        allow(stubbed_service).to receive(:api_request).with(valid_isbn).and_return(book_info_result)
         allow(ExternalApiService).to receive(:new).and_return(stubbed_service)
         get :show, params: { isbn: valid_isbn }
       end
@@ -40,9 +40,9 @@ describe Api::V1::ExternalApiController, type: :controller do
 
       before do
         stubbed_service = instance_double(ExternalApiService)
-        allow(stubbed_service).to receive(:api_request).and_return(not_found_result)
+        allow(stubbed_service).to receive(:api_request).with(wrong_isbn).and_return(not_found_result)
         allow(ExternalApiService).to receive(:new).and_return(stubbed_service)
-        get :show, params: { isbn: '0385472579' }
+        get :show, params: { isbn: wrong_isbn }
       end
 
       it 'has 404 status' do
