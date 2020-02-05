@@ -5,18 +5,18 @@ module Api
         book = search_book
         return book_not_found if book.blank?
 
-        render json: book
+        render json: book, status: :ok
       end
 
       private
 
       def search_book
-        search = api_request['ISBN:' + isbn]
+        search = JSON.parse(api_request)['ISBN:' + isbn]
         return if search.blank?
 
         search
           .slice('title', 'subtitle', 'number_of_pages', 'authors')
-          .merge(ISBN: isbn), status: :ok
+          .merge(ISBN: isbn)
       end
 
       def book_not_found

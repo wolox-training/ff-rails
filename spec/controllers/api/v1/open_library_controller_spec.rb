@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::ExternalApiController, type: :controller do
+describe Api::V1::OpenLibraryController, type: :controller do
   include_context 'Authenticated User'
 
   describe 'GET #book_information' do
@@ -8,24 +8,24 @@ describe Api::V1::ExternalApiController, type: :controller do
       let!(:valid_isbn) { '0385472579' }
       let!(:book_info_result) do
         JSON.parse(
-          File.read('./spec/support/fixtures/external_api_service_response_success.json'),
+          File.read('./spec/support/fixtures/open_library_service_response_success.json'),
           symbolize_names: true
         ).to_json
       end
 
       let!(:book_entire_result) do
         JSON.parse(
-          File.read('./spec/support/fixtures/external_api_service_entire_response.json'),
+          File.read('./spec/support/fixtures/open_library_service_entire_response.json'),
           symbolize_names: true
         ).to_json
       end
 
       before do
-        stubbed_service = instance_double(ExternalApiService)
+        stubbed_service = instance_double(OpenLibraryService)
         allow(stubbed_service).to receive(:api_request)
           .with(valid_isbn)
           .and_return(book_entire_result)
-        allow(ExternalApiService).to receive(:new).and_return(stubbed_service)
+        allow(OpenLibraryService).to receive(:new).and_return(stubbed_service)
         get :show, params: { isbn: valid_isbn }
       end
 
@@ -42,22 +42,22 @@ describe Api::V1::ExternalApiController, type: :controller do
       let!(:wrong_isbn) { 'wrong_isbn' }
       let!(:not_found_result) do
         JSON.parse(
-          File.read('./spec/support/fixtures/external_api_service_not_found.json'),
+          File.read('./spec/support/fixtures/open_library_service_not_found.json'),
           symbolize_names: true
         ).to_json
       end
 
       let!(:empty_response) do
         JSON.parse(
-          File.read('./spec/support/fixtures/external_api_service_empty_response.json'),
+          File.read('./spec/support/fixtures/open_library_service_empty_response.json'),
           symbolize_names: true
         ).to_json
       end
 
       before do
-        stubbed_service = instance_double(ExternalApiService)
+        stubbed_service = instance_double(OpenLibraryService)
         allow(stubbed_service).to receive(:api_request).with(wrong_isbn).and_return(empty_response)
-        allow(ExternalApiService).to receive(:new).and_return(stubbed_service)
+        allow(OpenLibraryService).to receive(:new).and_return(stubbed_service)
         get :show, params: { isbn: wrong_isbn }
       end
 
