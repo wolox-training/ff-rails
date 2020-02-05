@@ -1,4 +1,4 @@
-class ExternalApiService
+class OpenLibraryService
   include HTTParty
   base_uri 'https://openlibrary.org/api/books?bibkeys=ISBN:'
 

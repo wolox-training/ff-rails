@@ -1,12 +1,14 @@
 module Api
   module V1
-    class ExternalApiController < ApiController
+    class OpenLibraryController < ApiController
       def show
         book = search_book
         return book_not_found if book.blank?
 
         render json: book
       end
+
+      private
 
       def search_book
         search = api_request['ISBN:' + isbn]
@@ -22,7 +24,7 @@ module Api
       end
 
       def api_request
-        ExternalApiService.api_request(isbn)
+        OpenLibraryService.api_request(isbn)
       end
 
       def isbn
