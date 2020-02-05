@@ -16,7 +16,7 @@ module Api
 
         search
           .slice('title', 'subtitle', 'number_of_pages', 'authors')
-          .merge(ISBN: isbn)
+          .merge(ISBN: isbn), status: :ok
       end
 
       def book_not_found
