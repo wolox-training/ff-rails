@@ -1,22 +1,25 @@
 class OpenLibraryServiceStubs
   include WebMock::API
-  def open_library_service_request_success
-    stub_request(:get, 'https://openlibrary.org/api/books?bibkeys=ISBN:' + '0385472579'
-                       .concat('&format=json&jscmd=data'))
+  def request_success
+    fake_request('0385472579')
       .to_return(
         status: 200,
-        body: File.read('./spec/support/fixtures/open_library_service_response_success.json'),
+        body: File.read('./spec/support/fixtures/open_library_service_entire_response.json'),
         headers: { 'Content-Type': 'application/json' }
       )
   end
 
-  def open_library_service_not_found
-    stub_request(:get, 'https://openlibrary.org/api/books?bibkeys=ISBN:' + 'wrong_isbn'
-                       .concat('&format=json&jscmd=data'))
+  def empty_response
+    fake_request('wrong_isbn')
       .to_return(
-        status: 404,
-        body: File.read('./spec/support/fixtures/open_library_service_not_found.json'),
+        status: 200,
+        body: File.read('./spec/support/fixtures/open_library_service_empty_response.json'),
         headers: { 'Content-Type': 'application/json' }
       )
+  end
+
+  def fake_request(isbn)
+    stub_request(:get, 'https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn
+                       .concat('&format=json&jscmd=data'))
   end
 end

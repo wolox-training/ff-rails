@@ -2,22 +2,13 @@ module Api
   module V1
     class OpenLibraryController < ApiController
       def show
-        book = search_book
+        book = api_request
         return book_not_found if book.blank?
 
         render json: book, status: :ok
       end
 
       private
-
-      def search_book
-        search = JSON.parse(api_request)['ISBN:' + isbn]
-        return if search.blank?
-
-        search
-          .slice('title', 'subtitle', 'number_of_pages', 'authors')
-          .merge(ISBN: isbn)
-      end
 
       def book_not_found
         render json: { message: 'Book not found' }, status: :not_found

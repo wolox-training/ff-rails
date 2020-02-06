@@ -5,6 +5,11 @@ class OpenLibraryService
 
   def api_request(isbn)
     response = self.class.get(isbn + '&jscmd=data&format=json')
-    response.body
+    return response if response.blank?
+
+    search = JSON.parse(response.body)['ISBN:' + isbn]
+    search
+      .slice('title', 'subtitle', 'number_of_pages', 'authors')
+      .merge(ISBN: isbn)
   end
 end
