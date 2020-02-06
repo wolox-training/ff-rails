@@ -13,18 +13,11 @@ describe Api::V1::OpenLibraryController, type: :controller do
         ).to_json
       end
 
-      let!(:book_entire_result) do
-        JSON.parse(
-          File.read('./spec/support/fixtures/open_library_service_entire_response.json'),
-          symbolize_names: true
-        ).to_json
-      end
-
       before do
         stubbed_service = instance_double(OpenLibraryService)
         allow(stubbed_service).to receive(:api_request)
           .with(valid_isbn)
-          .and_return(book_entire_result)
+          .and_return(book_info_result)
         allow(OpenLibraryService).to receive(:new).and_return(stubbed_service)
         get :show, params: { isbn: valid_isbn }
       end
@@ -47,22 +40,13 @@ describe Api::V1::OpenLibraryController, type: :controller do
         ).to_json
       end
 
-      let!(:empty_response) do
-        JSON.parse(
-          File.read('./spec/support/fixtures/open_library_service_empty_response.json'),
-          symbolize_names: true
-        ).to_json
-      end
-
       before do
         stubbed_service = instance_double(OpenLibraryService)
-        allow(stubbed_service).to receive(:api_request).with(wrong_isbn).and_return(empty_response)
+        allow(stubbed_service).to receive(:api_request)
+          .with(wrong_isbn)
+          .and_return(not_found_result)
         allow(OpenLibraryService).to receive(:new).and_return(stubbed_service)
         get :show, params: { isbn: wrong_isbn }
-      end
-
-      it 'has 404 status' do
-        expect(response).to have_http_status(:not_found)
       end
 
       it 'returns an error message' do
