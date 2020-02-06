@@ -9,7 +9,7 @@ describe OpenLibraryService, type: :service do
       let!(:valid_isbn) { '0385472579' }
 
       before do
-        stubs.open_library_service_request_success
+        stubs.request_success
         service.api_request(valid_isbn)
       end
 
@@ -22,7 +22,7 @@ describe OpenLibraryService, type: :service do
 
       it 'returns a hash with expected attributes' do
         expected = File.read('./spec/support/fixtures/open_library_service_response_success.json')
-        expect(service.api_request(valid_isbn)).to be_json_eql(expected)
+        expect(service.api_request(valid_isbn).to_json).to be_json_eql(expected)
       end
     end
 
@@ -30,7 +30,7 @@ describe OpenLibraryService, type: :service do
       let!(:wrong_isbn) { 'wrong_isbn' }
 
       before do
-        stubs.open_library_service_not_found
+        stubs.empty_response
         service.api_request(wrong_isbn)
       end
 
@@ -42,7 +42,7 @@ describe OpenLibraryService, type: :service do
       end
 
       it 'returns an error message' do
-        expected = File.read('./spec/support/fixtures/open_library_service_not_found.json')
+        expected = File.read('./spec/support/fixtures/open_library_service_empty_response.json')
         expect(service.api_request(wrong_isbn)).to be_json_eql(expected)
       end
     end
