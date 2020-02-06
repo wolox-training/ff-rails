@@ -9,4 +9,15 @@ class RentsMailer < ApplicationMailer
       mail(to: @user.email, subject: @title)
     end
   end
+
+  def rent_end_email
+    @rents = Rent.where(end_date: Date.current)
+    @title = t('rents_mailer.rent_end_email.title')
+
+    @rents.each do |r|
+      I18n.with_locale(r.user.locale) do
+        mail(to: r.user.email, subject: @title)
+      end
+    end
+  end
 end

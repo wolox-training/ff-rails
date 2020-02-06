@@ -1,0 +1,5 @@
+en:
+  rents_mailer:
+    rent_end_email:
+      title: "Fin de alquiler"
+      text: "El alquiler finaliza el día de hoy"

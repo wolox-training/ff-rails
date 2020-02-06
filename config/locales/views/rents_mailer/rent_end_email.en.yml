@@ -1,0 +1,5 @@
+en:
+  rents_mailer:
+    rent_end_email:
+      title: "Rent end"
+      text: "Your rent is ending today."

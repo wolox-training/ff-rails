@@ -96,3 +96,6 @@ gem 'webmock', '~> 3.7.6'
 
 # JSON_Spec
 gem 'json_spec', '~> 1.1.5'
+
+# Sidekiq-scheduler
+gem 'sidekiq-scheduler', '~> 3.0.1'
