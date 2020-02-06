@@ -4,5 +4,5 @@
   - mailers
 :schedule:
   hello_world:
-    cron: '0 8 * * * America/Argentina/Buenos_Aires'
+    cron: '0 9 * * * America/Argentina/Buenos_Aires'
     class: RentEndJob
