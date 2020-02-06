@@ -5,6 +5,7 @@ class OpenLibraryService
   def self.api_request(isbn)
     response = get(base_uri + isbn + '&jscmd=data&format=json')
     return if response.blank?
+
     search = JSON.parse(response.body)['ISBN:' + isbn]
 
     search
