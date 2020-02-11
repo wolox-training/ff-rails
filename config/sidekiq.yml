@@ -3,6 +3,6 @@
   - default
   - mailers
 :schedule:
-  hello_world:
-    cron: '0 9 * * * America/Argentina/Buenos_Aires'
+  rent_expiration:
+    cron: '25 10 * * * America/Argentina/Buenos_Aires'
     class: RentEndJob
