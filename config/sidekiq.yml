@@ -4,5 +4,5 @@
   - mailers
 :schedule:
   rent_expiration:
-    cron: '25 10 * * * America/Argentina/Buenos_Aires'
+    cron: '0 9 * * * America/Argentina/Buenos_Aires'
     class: RentEndJob
