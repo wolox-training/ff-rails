@@ -1,13 +1,17 @@
 class AddBookTitleSizeLimit < ActiveRecord::Migration[5.1]
-  def change
+  def up
     truncate_book_titles
-    change_column :books, :title, :text, :limit => 25
+    change_column :books, :title, :string, :limit => 25
+  end
+
+  def down
+    change_column :books, :title, :string, :limit => nil
   end
   
   def truncate_book_titles
-    Book.all.each do |b|
-      b.title = b.title.truncate(25)
-      b.save!
+    Book.all.each do |book|
+      book.title = book.title.truncate(25)
+      book.save!
     end
   end
 end
