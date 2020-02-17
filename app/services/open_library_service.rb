@@ -1,9 +1,9 @@
 class OpenLibraryService
   include HTTParty
-  base_uri 'https://openlibrary.org/api/books?bibkeys=ISBN:'
+  base_uri ENV['OPEN_LIBRARY_URL']
 
   def api_request(isbn)
-    response = self.class.get(isbn + '&jscmd=data&format=json')
+    response = self.class.get(isbn + ENV['OPEN_LIBRARY_SUFFIX'])
     return response if response.blank?
 
     search = JSON.parse(response.body)['ISBN:' + isbn]

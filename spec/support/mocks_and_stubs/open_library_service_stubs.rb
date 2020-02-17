@@ -19,7 +19,7 @@ class OpenLibraryServiceStubs
   end
 
   def fake_request(isbn)
-    stub_request(:get, 'https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn
-                       .concat('&format=json&jscmd=data'))
+    stub_request(:get, ENV['OPEN_LIBRARY_URL'] + isbn
+                       .concat(ENV['OPEN_LIBRARY_SUFFIX']))
   end
 end

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'dotenv/load'
 
 describe OpenLibraryService, type: :service do
   let!(:stubs) { OpenLibraryServiceStubs.new }
@@ -16,8 +17,8 @@ describe OpenLibraryService, type: :service do
       it 'makes an external request' do
         expect(WebMock)
           .to(have_requested(:get,
-                             'https://openlibrary.org/api/books?bibkeys=ISBN:' + valid_isbn
-                             .concat('&format=json&jscmd=data')))
+                             ENV['OPEN_LIBRARY_URL'] + valid_isbn
+                             .concat(ENV['OPEN_LIBRARY_SUFFIX'])))
       end
 
       it 'returns a hash with expected attributes' do
@@ -37,8 +38,8 @@ describe OpenLibraryService, type: :service do
       it 'makes an external request' do
         expect(WebMock)
           .to(have_requested(:get,
-                             'https://openlibrary.org/api/books?bibkeys=ISBN:' + wrong_isbn
-                             .concat('&format=json&jscmd=data')))
+                             ENV['OPEN_LIBRARY_URL'] + wrong_isbn
+                             .concat(ENV['OPEN_LIBRARY_SUFFIX'])))
       end
 
       it 'returns an error message' do
