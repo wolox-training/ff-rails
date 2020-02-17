@@ -19,7 +19,7 @@ class OpenLibraryServiceStubs
   end
 
   def fake_request(isbn)
-    stub_request(:get, ENV['OPEN_LIBRARY_URL'] + isbn
-                       .concat(ENV['OPEN_LIBRARY_SUFFIX']))
+    stub_request(:get, Rails.application.secrets.open_library_url + isbn
+                       .concat(Rails.application.secrets.open_library_suffix))
   end
 end

@@ -1,9 +1,10 @@
 require 'rails_helper'
-require 'dotenv/load'
 
 describe OpenLibraryService, type: :service do
   let!(:stubs) { OpenLibraryServiceStubs.new }
   let!(:service) { described_class.new }
+  let!(:open_library_url) { Rails.application.secrets.open_library_url }
+  let!(:open_library_suffix) { Rails.application.secrets.open_library_suffix }
 
   describe 'GET open_library#show' do
     context 'when searching with a valid ISBN' do
@@ -17,8 +18,8 @@ describe OpenLibraryService, type: :service do
       it 'makes an external request' do
         expect(WebMock)
           .to(have_requested(:get,
-                             ENV['OPEN_LIBRARY_URL'] + valid_isbn
-                             .concat(ENV['OPEN_LIBRARY_SUFFIX'])))
+                             open_library_url + valid_isbn
+                             .concat(open_library_suffix)))
       end
 
       it 'returns a hash with expected attributes' do
@@ -38,8 +39,8 @@ describe OpenLibraryService, type: :service do
       it 'makes an external request' do
         expect(WebMock)
           .to(have_requested(:get,
-                             ENV['OPEN_LIBRARY_URL'] + wrong_isbn
-                             .concat(ENV['OPEN_LIBRARY_SUFFIX'])))
+                             open_library_url + wrong_isbn
+                             .concat(open_library_suffix)))
       end
 
       it 'returns an error message' do
