@@ -11,6 +11,8 @@ env:
     - RUBY_GC_MALLOC_LIMIT=90000000
     - RUBY_GC_HEAP_FREE_SLOTS=200000
     - SECURITY_SECRET_TOKEN=traviscitraviscitraviscitraviscitravisci
+    - OPEN_LIBRARY_URL='https://openlibrary.org/api/books?bibkeys=ISBN:'
+    - OPEN_LIBRARY_SUFFIX='&format=json&jscmd=data'
 
 services:
   - postgresql
