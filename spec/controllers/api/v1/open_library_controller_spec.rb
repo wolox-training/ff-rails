@@ -4,21 +4,42 @@ describe Api::V1::OpenLibraryController, type: :controller do
   include_context 'Authenticated User'
 
   describe 'GET #book_information' do
-    context 'When using a valid ISBN' do
-      let!(:valid_isbn) { '0385472579' }
-      let!(:book_info_result) do
-        JSON.parse(
-          File.read('./spec/support/fixtures/open_library_service_response_success.json'),
-          symbolize_names: true
-        ).to_json
-      end
+    let!(:valid_isbn) { '0385472579' }
+    let!(:wrong_isbn) { 'wrong_isbn' }
+    let!(:stubbed_service) { instance_double(OpenLibraryService) }
+    let!(:book_info_result) do
+      JSON.parse(
+        File.read('./spec/support/fixtures/open_library_service_response_success.json'),
+        symbolize_names: true
+      ).to_json
+    end
 
+    let!(:not_found_result) do
+      JSON.parse(
+        File.read('./spec/support/fixtures/open_library_service_not_found.json'),
+        symbolize_names: true
+      ).to_json
+    end
+
+    let!(:empty_result) do
+      JSON.parse(
+        File.read('./spec/support/fixtures/open_library_service_empty_response.json'),
+        symbolize_names: true
+      )
+    end
+
+    before do
+      allow(stubbed_service).to receive(:api_request)
+        .with(valid_isbn)
+        .and_return(book_info_result)
+      allow(stubbed_service).to receive(:api_request)
+        .with(wrong_isbn)
+        .and_return(empty_result)
+      allow(OpenLibraryService).to receive(:new).and_return(stubbed_service)
+    end
+
+    context 'When using a valid ISBN' do
       before do
-        stubbed_service = instance_double(OpenLibraryService)
-        allow(stubbed_service).to receive(:api_request)
-          .with(valid_isbn)
-          .and_return(book_info_result)
-        allow(OpenLibraryService).to receive(:new).and_return(stubbed_service)
         get :show, params: { isbn: valid_isbn }
       end
 
@@ -32,25 +53,16 @@ describe Api::V1::OpenLibraryController, type: :controller do
     end
 
     context 'When using an invalid ISBN' do
-      let!(:wrong_isbn) { 'wrong_isbn' }
-      let!(:not_found_result) do
-        JSON.parse(
-          File.read('./spec/support/fixtures/open_library_service_not_found.json'),
-          symbolize_names: true
-        ).to_json
-      end
-
       before do
-        stubbed_service = instance_double(OpenLibraryService)
-        allow(stubbed_service).to receive(:api_request)
-          .with(wrong_isbn)
-          .and_return(not_found_result)
-        allow(OpenLibraryService).to receive(:new).and_return(stubbed_service)
         get :show, params: { isbn: wrong_isbn }
       end
 
       it 'returns an error message' do
-        expect(response.body).to eq not_found_result
+        expect(response.body).to be_json_eql not_found_result
+      end
+
+      it 'has 404 status' do
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
