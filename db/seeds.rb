@@ -1,5 +1,3 @@
-require 'faker'
-
 50_000.times do
   Book.create(
     genre: Faker::Book.genre,
