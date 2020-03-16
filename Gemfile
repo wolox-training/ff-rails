@@ -79,20 +79,23 @@ gem 'active_model_serializers', '~> 0.10.0'
 # Wor-Paginate for paginated responses
 gem 'wor-paginate', '~> 0.1.8'
 
-# Mailer
+# Sidekiq - Mailer queues
 gem 'sidekiq', '~> 6.0.3'
 
-# I18n
+# I18n - Strings internationalization
 gem 'rails-i18n', '~> 5.1.3'
 
-# Pundit
+# Pundit - Endpoints authorization
 gem 'pundit', '~> 2.1.0'
 
 # API integration - Httparty
 gem 'httparty', '~> 0.17.3'
 
-# Webmock
+# Webmock - Mocks and stubs in tests
 gem 'webmock', '~> 3.7.6'
 
-# JSON_Spec
+# JSON_Spec - JSON comparison
 gem 'json_spec', '~> 1.1.5'
+
+# Sidekiq-scheduler - Mailer and other jobs scheduling
+gem 'sidekiq-scheduler', '~> 3.0.1'

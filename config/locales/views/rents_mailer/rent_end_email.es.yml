@@ -1,0 +1,6 @@
+es:
+  rents_mailer:
+    rent_end_email:
+      greetings: "Hola %{user_name}!"
+      text: "El alquiler del libro %{book_title} que empezó el %{start_date} finaliza el día de hoy"
+      title: "Fin de alquiler"
