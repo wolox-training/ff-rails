@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20200211134024) do
     t.string "genre", null: false
     t.string "author", null: false
     t.string "image", null: false
-    t.text "title", null: false
+    t.string "title", limit: 25, null: false
     t.string "editor", null: false
     t.string "year", null: false
     t.datetime "created_at", null: false

@@ -5,7 +5,7 @@ module Api
         book = api_request
         return book_not_found if book.blank?
 
-        render json: book, status: :ok
+        render json: book
       end
 
       private
