@@ -80,7 +80,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'wor-paginate', '~> 0.1.8'
 
 # Sidekiq - Mailer queues
-gem 'sidekiq', '~> 6.0.3'
+gem 'sidekiq', '~> 6.4.0'
 
 # I18n - Strings internationalization
 gem 'rails-i18n', '~> 5.1.3'
