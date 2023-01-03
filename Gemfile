@@ -89,7 +89,7 @@ gem 'rails-i18n', '~> 5.1.3'
 gem 'pundit', '~> 2.1.0'
 
 # API integration - Httparty
-gem 'httparty', '~> 0.17.3'
+gem 'httparty', '~> 0.21.0'
 
 # Webmock - Mocks and stubs in tests
 gem 'webmock', '~> 3.7.6'
